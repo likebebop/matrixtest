@@ -1,6 +1,8 @@
 package com.example.likebebop.matrixtest;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -11,16 +13,25 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 
 public class MainActivity extends Activity {
 
+    ImageView iv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        init();
+        build0();
+        iv = (ImageView) findViewById(R.id.image_view);
+        iv.setImageBitmap(bitmap);
+    }
 
+    private void init() {
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.test_480_640).copy(Bitmap.Config.ARGB_8888, true);
         forceBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.force_400_300).copy(Bitmap.Config.ARGB_8888, true);
         canvas = new Canvas(bitmap);
@@ -31,14 +42,73 @@ public class MainActivity extends Activity {
         h2 = forceBitmap.getHeight();
 
         paint.setAlpha(200);
-
-        build180();
-        ImageView iv = (ImageView) findViewById(R.id.image_view);
-        iv.setImageBitmap(bitmap);
-
     }
 
-    Bitmap bitmap, forceBitmap;
+    enum Type {
+        D_0 {
+            @Override
+            void run(MainActivity a) {
+                a.build0();
+            }
+        },
+        D_90 {
+            @Override
+            void run(MainActivity a) {
+                a.build90();
+            }
+        },
+        D_180 {
+            @Override
+            void run(MainActivity a) {
+                a.build180();
+
+            }
+        },
+        D_270 {
+            @Override
+            void run(MainActivity a) {
+                a.build270();
+
+            }
+        },
+        CANVAS {
+            @Override
+            void run(MainActivity a) {
+                a.build();
+            }
+        };
+        abstract void run(MainActivity a);
+
+        public static String[] names() {
+            Type[] states = values();
+            String[] names = new String[states.length];
+
+            for (int i = 0; i < states.length; i++) {
+                names[i] = states[i].name();
+            }
+
+            return names;
+        }
+    }
+
+
+    public void onClickSelectCase(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Select type").setSingleChoiceItems(Type.names(), 0,
+                new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                init();
+                Type.values()[which].run(MainActivity.this);
+                iv.setImageBitmap(bitmap);
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+
+        Bitmap bitmap, forceBitmap;
     Canvas canvas;
     float w, h, w2, h2;
     Paint paint = new Paint();
