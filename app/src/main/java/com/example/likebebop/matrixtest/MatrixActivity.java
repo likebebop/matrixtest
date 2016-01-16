@@ -69,7 +69,7 @@ public class MatrixActivity extends Activity {
             public void apply(Matrix matrix, float value, boolean pre) {
                 if (pre) {
                     matrix.preTranslate(value, 0);
-                }  else {
+                }  else { 
                     matrix.postTranslate(value, 0);
                 }
             }
