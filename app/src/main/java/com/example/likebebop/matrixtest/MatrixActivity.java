@@ -1,18 +1,13 @@
 package com.example.likebebop.matrixtest;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -27,6 +22,8 @@ public class MatrixActivity extends Activity {
     Matrix matrix = new Matrix();
     private MatrixView matrixView;
     ArrayList<Operation> opList = new ArrayList<Operation>();
+    private TextView etcStatus;
+    private CheckBox preCb;
 
 
     @Override
@@ -47,41 +44,66 @@ public class MatrixActivity extends Activity {
 
     public void onClickReset(View v) {
         opList.clear();
+        apply();
+    }
+
+    public void onClickClearCtl(View v) {
         for (OperationType type : OperationType.values()) {
             type.reset();
         }
-        apply();
     }
 
     enum OperationType {
         ROTATE(R.id.rotate_seekbar, 15f) {
             @Override
-            public void apply(Matrix matrix, float value) {
-                matrix.postRotate(value);
+            public void apply(Matrix matrix, float value, boolean pre) {
+                if (pre) {
+                    matrix.preRotate(value);
+                } else {
+                    matrix.postRotate(value);
+                }
             }
         },
-        TRANSLATE_X(R.id.translate_x_seekbar, 20f) {
+        TRANSLATE_X(R.id.translate_x_seekbar, 10f) {
             @Override
-            public void apply(Matrix matrix, float value) {
-                matrix.postTranslate(value, 0);
+            public void apply(Matrix matrix, float value, boolean pre) {
+                if (pre) {
+                    matrix.preTranslate(value, 0);
+                }  else {
+                    matrix.postTranslate(value, 0);
+                }
             }
         },
-        TRANSLATE_Y(R.id.translate_y_seekbar, 20f) {
+        TRANSLATE_Y(R.id.translate_y_seekbar, 10f) {
             @Override
-            public void apply(Matrix matrix, float value) {
-                matrix.postTranslate(0, value);
+            public void apply(Matrix matrix, float value, boolean pre) {
+                if (pre) {
+                    matrix.preTranslate(0, value);
+                } else {
+                    matrix.postTranslate(0, value);
+                }
+
             }
         },
         SCALE_X(R.id.scale_x_seekbar, 0.2f) {
             @Override
-            public void apply(Matrix matrix, float value) {
-                matrix.postScale(value, 1f);
+            public void apply(Matrix matrix, float value, boolean pre) {
+                if (pre) {
+                    matrix.preScale(value, 1f);
+                } else {
+                    matrix.postScale(value, 1f);
+                }
             }
         },
         SCALE_Y(R.id.scale_y_seekbar, 0.2f) {
             @Override
-            public void apply(Matrix matrix, float value) {
-                matrix.postScale(1f, value);
+            public void apply(Matrix matrix, float value, boolean pre) {
+                if (pre) {
+                    matrix.preScale(1f, value);
+                } else {
+                    matrix.postScale(1f, value);
+                }
+
             }
         };
 
@@ -121,7 +143,7 @@ public class MatrixActivity extends Activity {
             btn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    a.opList.add(new Operation(OperationType.this, getValue()));
+                    a.opList.add(new Operation(OperationType.this, getValue(), a.preCb.isChecked()));
                     a.apply();
                 }
             });
@@ -140,33 +162,52 @@ public class MatrixActivity extends Activity {
         }
 
 
-        public abstract void apply(Matrix matrix, float value);
+        public abstract void apply(Matrix matrix, float value, boolean pre);
     }
 
     static class Operation {
         OperationType type;
         float value;
+        boolean pre;
 
-        public Operation(OperationType type, float value) {
+        public Operation(OperationType type, float value, boolean pre) {
             this.type = type;
             this.value = value;
+            this.pre = pre;
         }
 
         public void apply(Matrix matrix) {
-            type.apply(matrix, value);
+            type.apply(matrix, value, pre);
         }
 
         public String toString() {
-            return String.format("(%s, %.2f)", type, value);
+            return String.format("(%s_%s, %.2f)", type, pre ? "pre" : "post", value);
         }
     }
 
     private void init() {
         status = (TextView)findViewById(R.id.status_text);
+        etcStatus = (TextView)findViewById(R.id.etc_status_text);
         status.setMovementMethod(new ScrollingMovementMethod());
+        etcStatus.setMovementMethod(new ScrollingMovementMethod());
+
         for (OperationType type : OperationType.values()) {
             type.init(this);
         }
         matrixView = (MatrixView)findViewById(R.id.matrix_view);
+        preCb = (CheckBox)findViewById(R.id.pre_cb);
+
+        matrixView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v, int left, int top, int right, int bottom, int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                updateEtcStatus();
+            }
+        });
+    }
+
+    public void updateEtcStatus() {
+        etcStatus.setText(String.format("bitmap (%dx%d), view (%dx%d)",
+                matrixView.bitmap.getWidth(), matrixView.bitmap.getHeight(),
+                matrixView.getWidth(), matrixView.getHeight()));
     }
 }

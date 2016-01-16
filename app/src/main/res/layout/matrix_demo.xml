@@ -3,11 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:weightSum="1"
-    android:background="@android:color/black"
     tools:context=".MainActivity">
 
 
@@ -15,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="@android:color/background_dark"
         >
 
         <TextView
@@ -25,7 +19,6 @@
             android:scrollbars="vertical"
             android:textSize="8sp"
             android:maxLines="255"
-            android:textColor="@android:color/white"
             android:text=""/>
 
         <ScrollView
@@ -44,13 +37,38 @@
                         android:layout_height="wrap_content"
                         android:onClick="onClickReset"
                         android:text="reset" />
+                    <TextView
+                        android:id="@+id/etc_status_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:textSize="8sp"
+                        android:maxLines="255"
+                        android:text="etc" />
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:onClick="onClickClearCtl"
+                        android:text="reset"
+
+                        />
+                </TableRow>
+                <TableRow>
+
+                    <CheckBox
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="pre concat"
+                        android:id="@+id/pre_cb"
+                        android:layout_column="1" />
+
                 </TableRow>
                 <TableRow>
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClickRotate"
-                        android:text="apply rotate" />
+                        android:text="rotate" />
 
                     <SeekBar
                         android:id="@+id/rotate_seekbar"
@@ -62,7 +80,6 @@
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
                         android:text="0.00"/>
                 </TableRow>
 
@@ -72,18 +89,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClickTranslateX"
-                        android:text="apply tr X" />
+                        android:text="tr X" />
 
                     <SeekBar
                         android:id="@+id/translate_x_seekbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="20"
-                        android:progress="10" />
+                        android:max="80"
+                        android:progress="40" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
                         android:text="0.00"/>
                 </TableRow>
 
@@ -93,18 +109,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClickTranslateY"
-                        android:text="apply tr Y" />
+                        android:text="tr Y" />
 
                     <SeekBar
                         android:id="@+id/translate_y_seekbar"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:max="20"
-                        android:progress="10" />
+                        android:max="80"
+                        android:progress="40" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
                         android:text="0.00"/>
                 </TableRow>
 
@@ -114,7 +129,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClickScaleX"
-                        android:text="apply sc X" />
+                        android:text="sc X" />
 
                     <SeekBar
                         android:id="@+id/scale_x_seekbar"
@@ -125,7 +140,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
                         android:text="0.00"/>
                 </TableRow>
 
@@ -135,7 +149,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClickScaleY"
-                        android:text="apply sc Y" />
+                        android:text="sc Y" />
 
                     <SeekBar
                         android:id="@+id/scale_y_seekbar"
@@ -146,7 +160,6 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
                         android:text="0.00"/>
                 </TableRow>
 
