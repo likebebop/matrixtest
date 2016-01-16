@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class MatrixActivity extends Activity {
     ArrayList<Operation> opList = new ArrayList<Operation>();
     private TextView etcStatus;
     private CheckBox preCb;
+    public CheckBox canvasCb;
 
 
     @Override
@@ -69,7 +71,7 @@ public class MatrixActivity extends Activity {
             public void apply(Matrix matrix, float value, boolean pre) {
                 if (pre) {
                     matrix.preTranslate(value, 0);
-                }  else { 
+                }  else {
                     matrix.postTranslate(value, 0);
                 }
             }
@@ -196,6 +198,13 @@ public class MatrixActivity extends Activity {
         }
         matrixView = (MatrixView)findViewById(R.id.matrix_view);
         preCb = (CheckBox)findViewById(R.id.pre_cb);
+        canvasCb = (CheckBox)findViewById(R.id.canvas_cb);
+        canvasCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                matrixView.invalidate();
+            }
+        });
 
         matrixView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
             @Override
@@ -203,6 +212,8 @@ public class MatrixActivity extends Activity {
                 updateEtcStatus();
             }
         });
+
+
     }
 
     public void updateEtcStatus() {

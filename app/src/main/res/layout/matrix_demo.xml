@@ -62,6 +62,13 @@
                         android:id="@+id/pre_cb"
                         android:layout_column="1" />
 
+                    <CheckBox
+                        android:id="@+id/canvas_cb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="canvas"
+                        android:layout_column="2" />
+
                 </TableRow>
                 <TableRow>
                     <Button
@@ -168,7 +175,7 @@
 
 
         <com.example.likebebop.matrixtest.MatrixView
-            android:background="@android:color/background_light"
+            android:background="@android:color/darker_gray"
             android:id="@+id/matrix_view"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" />
