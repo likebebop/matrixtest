@@ -6,13 +6,9 @@ import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -38,8 +34,8 @@ public class MainActivity extends Activity {
         w = bitmap.getWidth();
         h = bitmap.getHeight();
 
-        w2 = forceBitmap.getWidth();
-        h2 = forceBitmap.getHeight();
+        forceW = forceBitmap.getWidth();
+        forceH = forceBitmap.getHeight();
 
         paint.setAlpha(200);
     }
@@ -110,17 +106,17 @@ public class MainActivity extends Activity {
 
         Bitmap bitmap, forceBitmap;
     Canvas canvas;
-    float w, h, w2, h2;
+    float w, h, forceW, forceH;
     Paint paint = new Paint();
 
     //-- canvas adjust와 draw bitmap의 matrix 설정은 같다.
     private void build() {
         Matrix m = new Matrix();
-        float scale = h/w2;
+        float scale = h/ forceW;
         m.postRotate(90);
         m.postTranslate(w, 0);
         m.preScale(scale, scale);
-        //m.postScale(h/h2, w/w2);
+        //m.postScale(h/forceH, w/forceW);
         canvas.setMatrix(m);
         //canvas.scale(scale, scale);
         canvas.drawBitmap(forceBitmap, 0, 0, paint);
@@ -129,7 +125,7 @@ public class MainActivity extends Activity {
 
     private void build0() {
         Matrix m = new Matrix();
-        float scale = w/w2;
+        float scale = w/ forceW;
         m.postScale(scale, scale);
         m.postRotate(0);
         canvas.drawBitmap(forceBitmap, m, paint);
@@ -137,7 +133,7 @@ public class MainActivity extends Activity {
 
     private void build90() {
         Matrix m = new Matrix();
-        float scale = h/w2;
+        float scale = h/ forceW;
         m.postScale(scale, scale);
         m.postRotate(90);
         m.postTranslate(w, 0);
@@ -146,7 +142,7 @@ public class MainActivity extends Activity {
 
     private void build270() {
         Matrix m = new Matrix();
-        float scale = h/w2;
+        float scale = h/ forceW;
         m.postScale(scale, scale);
         m.postRotate(270);
         m.postTranslate(0, h);
@@ -155,7 +151,7 @@ public class MainActivity extends Activity {
 
     private void build180() {
         Matrix m = new Matrix();
-        float scale = w/w2;
+        float scale = w/ forceW;
         m.postScale(scale, scale);
         m.postRotate(180);
         m.postTranslate(w, h);
