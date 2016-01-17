@@ -21,7 +21,7 @@ public class MatrixActivity extends Activity {
     ImageView iv;
     private TextView status;
     Matrix matrix = new Matrix();
-    private MatrixView matrixView;
+    public MatrixView matrixView;
     ArrayList<Operation> opList = new ArrayList<Operation>();
     private TextView etcStatus;
     private CheckBox preCb;
@@ -56,6 +56,7 @@ public class MatrixActivity extends Activity {
     }
 
     enum OperationType {
+
         ROTATE(R.id.rotate_seekbar, 15f) {
             @Override
             public void apply(Matrix matrix, float value, boolean pre) {
@@ -63,6 +64,16 @@ public class MatrixActivity extends Activity {
                     matrix.preRotate(value);
                 } else {
                     matrix.postRotate(value);
+                }
+            }
+        },
+        ROTATE_C(R.id.rotate_c_seekbar, 15f) {
+            @Override
+            public void apply(Matrix matrix, float value, boolean pre) {
+                if (pre) {
+                    matrix.preRotate(value, a.matrixView.r.centerX(), a.matrixView.r.centerY());
+                } else {
+                    matrix.postRotate(value, a.matrixView.r.centerX(), a.matrixView.r.centerY());
                 }
             }
         },
@@ -114,6 +125,7 @@ public class MatrixActivity extends Activity {
 
         //-- just test
         private SeekBar sb;
+        private static MatrixActivity a;
 
         OperationType(int seekBarId, float step) {
             this.seekBarId = seekBarId;
@@ -121,6 +133,7 @@ public class MatrixActivity extends Activity {
         }
 
         void init(final MatrixActivity a) {
+            this.a = a;
             sb = (SeekBar) a.findViewById(seekBarId);
             ViewGroup vg = (ViewGroup)sb.getParent();
             final TextView tv = (TextView)vg.getChildAt(2);

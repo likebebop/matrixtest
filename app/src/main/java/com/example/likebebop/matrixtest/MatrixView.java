@@ -24,23 +24,25 @@ public class MatrixView extends View {
     private int cx;
     private int cy;
     private Matrix matrix = new Matrix();
-    private RectF r = new RectF();
+    public RectF r = new RectF();
     private float[] pts = new float[6];
     private float[] dstPts = new float[6];
     private Paint refPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
     private Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
     private Paint guidePaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
-    private Paint mapPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
+    private Paint orgPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
+    private Paint dstPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
 
     public MatrixView(Context context, AttributeSet attrs) {
         super(context, attrs);
         a = (MatrixActivity) context;
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.force_400_300).copy(Bitmap.Config.ARGB_8888, true);
         r.set(0, 0, bitmap.getWidth(), bitmap.getHeight());
-        refPaint.setShader(new LinearGradient(0, 0, r.width(), r.height(), Color.BLACK, Color.BLUE, Shader.TileMode.MIRROR));
+        //refPaint.setShader(new LinearGradient(0, 0, r.width(), r.height(), Color.BLACK, Color.BLUE, Shader.TileMode.MIRROR));
         bitmapPaint.setAlpha(128);
         guidePaint.setColor(Color.RED);
-        mapPaint.setColor(Color.CYAN);
+        orgPaint.setColor(Color.MAGENTA);
+        dstPaint.setColor(Color.CYAN);
         pts = new float[]{r.left, r.bottom, r.right, r.bottom, r.left, r.top};
     }
 
@@ -64,10 +66,10 @@ public class MatrixView extends View {
             canvas.translate(cx, cy);
         }
 
-        canvas.drawRect(r, refPaint);
-        drawPts(canvas, pts, guidePaint);
+        //canvas.drawRect(r, refPaint);
+        drawPts(canvas, pts, orgPaint);
         matrix.mapPoints(dstPts, pts);
-        drawPts(canvas, dstPts, mapPaint);
+        drawPts(canvas, dstPts, dstPaint);
         canvas.drawBitmap(bitmap, matrix, bitmapPaint);
     }
 
@@ -78,6 +80,7 @@ public class MatrixView extends View {
         for (;idx < pts.length;) {
             path.lineTo(pts[idx++], pts[idx++]);
         }
+        p.setAlpha(128);
         p.setStrokeWidth(5);
         p.setStyle(Paint.Style.FILL);
         //-- vertex left, top

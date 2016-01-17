@@ -89,6 +89,24 @@
                         android:layout_height="wrap_content"
                         android:text="0.00"/>
                 </TableRow>
+                <TableRow>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="rotate_c" />
+
+                    <SeekBar
+                        android:id="@+id/rotate_c_seekbar"
+                        android:max="48"
+                        android:progress="24"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"/>
+                </TableRow>
 
                 <TableRow>
 
