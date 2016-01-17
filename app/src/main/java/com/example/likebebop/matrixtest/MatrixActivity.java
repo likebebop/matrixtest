@@ -26,6 +26,8 @@ public class MatrixActivity extends Activity {
     private TextView etcStatus;
     private CheckBox preCb;
     public CheckBox canvasCb;
+    public CheckBox canvasMatrixCb;
+    public CheckBox swLayerCb;
 
 
     @Override
@@ -211,11 +213,29 @@ public class MatrixActivity extends Activity {
         }
         matrixView = (MatrixView)findViewById(R.id.matrix_view);
         preCb = (CheckBox)findViewById(R.id.pre_cb);
+
+        canvasMatrixCb = (CheckBox)findViewById(R.id.canvas_matrix_cb);
+        canvasMatrixCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                matrixView.invalidate();
+            }
+        });
+
+
         canvasCb = (CheckBox)findViewById(R.id.canvas_cb);
         canvasCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 matrixView.invalidate();
+            }
+        });
+
+        swLayerCb = (CheckBox)findViewById(R.id.swlayer_cb);
+        swLayerCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                matrixView.updateLayerType();
             }
         });
 

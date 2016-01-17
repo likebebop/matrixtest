@@ -9,17 +9,51 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/status_text"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:scrollbars="vertical"
-            android:textSize="8sp"
             android:maxLines="255"
-            android:text=""/>
+            android:scrollbars="vertical"
+            android:text=""
+            android:textSize="8sp" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <CheckBox
+                    android:id="@+id/canvas_matrix_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="canvas matrix" />
+
+                <CheckBox
+                    android:id="@+id/pre_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pre concat" />
+
+                <CheckBox
+                    android:id="@+id/canvas_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="mv center" />
+
+                <CheckBox
+                    android:id="@+id/swlayer_cb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sw layer" />
+            </LinearLayout>
+        </HorizontalScrollView>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -32,19 +66,22 @@
 
 
                 <TableRow>
+
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:onClick="onClickReset"
                         android:text="reset" />
+
                     <TextView
                         android:id="@+id/etc_status_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:scrollbars="vertical"
-                        android:textSize="8sp"
                         android:maxLines="255"
-                        android:text="etc" />
+                        android:scrollbars="vertical"
+                        android:text="etc"
+                        android:textSize="8sp" />
+
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -53,24 +90,14 @@
 
                         />
                 </TableRow>
+
                 <TableRow>
 
-                    <CheckBox
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="pre concat"
-                        android:id="@+id/pre_cb"
-                        android:layout_column="1" />
-
-                    <CheckBox
-                        android:id="@+id/canvas_cb"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="canvas"
-                        android:layout_column="2" />
 
                 </TableRow>
+
                 <TableRow>
+
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -79,17 +106,19 @@
 
                     <SeekBar
                         android:id="@+id/rotate_seekbar"
-                        android:max="48"
-                        android:progress="24"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:max="48"
+                        android:progress="24" />
 
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="0.00"/>
+                        android:text="0.00" />
                 </TableRow>
+
                 <TableRow>
+
                     <Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -97,15 +126,15 @@
 
                     <SeekBar
                         android:id="@+id/rotate_c_seekbar"
-                        android:max="48"
-                        android:progress="24"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:max="48"
+                        android:progress="24" />
 
                     <TextView
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="0.00"/>
+                        android:text="0.00" />
                 </TableRow>
 
                 <TableRow>
@@ -122,10 +151,11 @@
                         android:layout_height="wrap_content"
                         android:max="80"
                         android:progress="40" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"/>
+                        android:text="0.00" />
                 </TableRow>
 
                 <TableRow>
@@ -142,10 +172,11 @@
                         android:layout_height="wrap_content"
                         android:max="80"
                         android:progress="40" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"/>
+                        android:text="0.00" />
                 </TableRow>
 
                 <TableRow>
@@ -162,10 +193,11 @@
                         android:layout_height="wrap_content"
                         android:max="20"
                         android:progress="10" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"/>
+                        android:text="0.00" />
                 </TableRow>
 
                 <TableRow>
@@ -182,10 +214,11 @@
                         android:layout_height="wrap_content"
                         android:max="20"
                         android:progress="10" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.00"/>
+                        android:text="0.00" />
                 </TableRow>
 
             </TableLayout>
@@ -193,10 +226,10 @@
 
 
         <com.example.likebebop.matrixtest.MatrixView
-            android:background="@android:color/darker_gray"
             android:id="@+id/matrix_view"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            android:background="@android:color/darker_gray" />
 
 
     </LinearLayout>

@@ -5,12 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.LinearGradient;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -52,6 +50,10 @@ public class MatrixView extends View {
         cy = h / 2;
     }
 
+    public void updateLayerType() {
+        setLayerType(a.swLayerCb.isChecked() ? LAYER_TYPE_SOFTWARE : LAYER_TYPE_HARDWARE, null);
+    }
+
     public void setMatrix(Matrix matrix) {
         this.matrix = matrix;
         invalidate();
@@ -59,6 +61,7 @@ public class MatrixView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        //int sc = canvas.saveLayer(null, null, Canvas.ALL_SAVE_FLAG);
         canvas.drawLine(cx, 0, cx, getHeight(), guidePaint);
         canvas.drawLine(0, cy, getWidth(), cy, guidePaint);
 
@@ -68,9 +71,18 @@ public class MatrixView extends View {
 
         //canvas.drawRect(r, refPaint);
         drawPts(canvas, pts, orgPaint);
-        matrix.mapPoints(dstPts, pts);
-        drawPts(canvas, dstPts, dstPaint);
-        canvas.drawBitmap(bitmap, matrix, bitmapPaint);
+
+        if (a.canvasMatrixCb.isChecked()) {
+            canvas.concat(matrix);
+            drawPts(canvas, pts, dstPaint);
+            canvas.drawBitmap(bitmap, new Matrix(), bitmapPaint);
+        } else {
+            matrix.mapPoints(dstPts, pts);
+            drawPts(canvas, dstPts, dstPaint);
+            canvas.drawBitmap(bitmap, matrix, bitmapPaint);
+        }
+        //canvas.restoreToCount(sc);
+
     }
 
     private void drawPts(Canvas canvas, float[] pts, Paint p) {
