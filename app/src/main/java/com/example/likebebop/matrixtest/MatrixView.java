@@ -25,8 +25,8 @@ public class MatrixView extends View {
     private int cy;
     private Matrix matrix = new Matrix();
     private RectF r = new RectF();
-    private float[] pts = new float[8];
-    private float[] dstPts = new float[8];
+    private float[] pts = new float[6];
+    private float[] dstPts = new float[6];
     private Paint refPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
     private Paint bitmapPaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
     private Paint guidePaint = new Paint(Paint.ANTI_ALIAS_FLAG|Paint.DITHER_FLAG);
@@ -41,7 +41,7 @@ public class MatrixView extends View {
         bitmapPaint.setAlpha(128);
         guidePaint.setColor(Color.RED);
         mapPaint.setColor(Color.CYAN);
-        pts = new float[]{r.left, r.bottom, r.right, r.bottom, r.left, r.top, r.right, r.top};
+        pts = new float[]{r.left, r.bottom, r.right, r.bottom, r.left, r.top};
     }
 
     @Override
@@ -75,13 +75,18 @@ public class MatrixView extends View {
         Path path = new Path();
         int idx = 0;
         path.moveTo(pts[idx++], pts[idx++]);
-        for (;idx < 8;) {
+        for (;idx < pts.length;) {
             path.lineTo(pts[idx++], pts[idx++]);
         }
         p.setStrokeWidth(5);
         p.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(pts[0], pts[1], 10, p);
-        p.setStyle(Paint.Style.STROKE);
+        //-- vertex left, top
+        canvas.drawCircle(pts[4], pts[5], 10, p);
+        //-- vertex left, bottom
+        RectF r = new RectF(pts[0], pts[1], pts[0], pts[1]);
+        r.inset(-10, -10);
+        canvas.drawRect(r, p);
+        p.setStyle(Paint.Style.FILL_AND_STROKE);
         canvas.drawPath(path, p);
 
     }
