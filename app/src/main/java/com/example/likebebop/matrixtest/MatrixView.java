@@ -106,5 +106,21 @@ public class MatrixView extends View {
 
     }
 
+    public String toString() {
+        return String.format("input = %s\noutput = %s\nmatrix = %s"
+                , pointArrayToString(pts), pointArrayToString(dstPts), matrix.toShortString());
+    }
+
+    private String pointArrayToString(float[] pts) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (int i = 0; i < pts.length;) {
+            sb.append(String.format("(%.2f, %.2f),", pts[i++], pts[i++]));
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+
 
 }

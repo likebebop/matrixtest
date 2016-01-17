@@ -42,8 +42,11 @@ public class MatrixActivity extends Activity {
         for (Operation o : opList) {
             o.apply(matrix);
         }
-        status.setText(opList.toString());
+
         matrixView.setMatrix(matrix);
+        status.setText(opList.toString() +
+                String.format("\n%s",
+                        matrixView.toString()));
     }
 
     public void onClickReset(View v) {
