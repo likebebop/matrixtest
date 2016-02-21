@@ -15,18 +15,29 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+
 
 public class MatrixActivity extends Activity {
-
-    ImageView iv;
-    private TextView status;
+    @Bind(R.id.status_text)
+    TextView status;
     Matrix matrix = new Matrix();
+
+
+    @Bind(R.id.matrix_view)
     public MatrixView matrixView;
     ArrayList<Operation> opList = new ArrayList<Operation>();
-    private TextView etcStatus;
-    private CheckBox preCb;
+
+    @Bind(R.id.etc_status_text)
+    TextView etcStatus;
+    @Bind(R.id.pre_cb)
+    CheckBox preCb;
+    @Bind(R.id.canvas_cb)
     public CheckBox canvasCb;
+    @Bind(R.id.canvas_matrix_cb)
     public CheckBox canvasMatrixCb;
+    @Bind(R.id.swlayer_cb)
     public CheckBox swLayerCb;
 
 
@@ -34,6 +45,7 @@ public class MatrixActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.matrix_demo);
+        ButterKnife.bind(this);
         init();
     }
 
@@ -206,18 +218,13 @@ public class MatrixActivity extends Activity {
     }
 
     private void init() {
-        status = (TextView)findViewById(R.id.status_text);
-        etcStatus = (TextView)findViewById(R.id.etc_status_text);
         status.setMovementMethod(new ScrollingMovementMethod());
         etcStatus.setMovementMethod(new ScrollingMovementMethod());
 
         for (OperationType type : OperationType.values()) {
             type.init(this);
         }
-        matrixView = (MatrixView)findViewById(R.id.matrix_view);
-        preCb = (CheckBox)findViewById(R.id.pre_cb);
 
-        canvasMatrixCb = (CheckBox)findViewById(R.id.canvas_matrix_cb);
         canvasMatrixCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -225,8 +232,6 @@ public class MatrixActivity extends Activity {
             }
         });
 
-
-        canvasCb = (CheckBox)findViewById(R.id.canvas_cb);
         canvasCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -234,7 +239,6 @@ public class MatrixActivity extends Activity {
             }
         });
 
-        swLayerCb = (CheckBox)findViewById(R.id.swlayer_cb);
         swLayerCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
