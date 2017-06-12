@@ -2,32 +2,58 @@
 <items version="2" >
 
     <item
-        jar="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
-        <dex dex="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/pre-dexed/debug/classes-bcacaad7c50bf4d071303e92f38d05341158035d.jar" />
-    </item>
-    <item
-        jar="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
-        <dex dex="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/pre-dexed/debug/classes-75176c27c3f420bfe5f844e8442363bd7199b65b.jar" />
-    </item>
-    <item
-        jar="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
+        is-multidex="true"
+        jar="/Users/likebebop/.android/build-cache/3204b70d1ba994bd88d4c71085492f0cfe762096/output/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
         sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
-        <dex dex="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.0-3a4eed90c674ca6b56d445305cd68551ee53288b.jar" />
+        <dex dex="/Users/likebebop/git/matrixtest/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.2.0_b33350f7ddf5c3b8ae5c75249a5f9ea67066d514/classes.dex" />
     </item>
     <item
+        is-multidex="true"
+        jar="/Users/likebebop/.android/build-cache/9546c6418027069daad13c70183031b0c0ebf319/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/likebebop/git/matrixtest/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_1dbb67c0c24c0f304a06e836c47a60ea8ee0c4da/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/likebebop/git/matrixtest/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/likebebop/git/matrixtest/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_29efe57650582dff9d8e530cfce5923dfe53f7bd/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/likebebop/git/matrixtest/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="9f8531165b68bd5f340dd027cfc07ecd3db79d8b">
+        <dex dex="/Users/likebebop/git/matrixtest/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_c86974dd1f53f6d16b3c03a8b5cd062db040fb84/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="/Users/likebebop/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
-        jumboMode="false"
-        revision="21.1.2"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
         sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
-        <dex dex="/Volumes/Mac Data/MyLucy/git/matrixtest/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.0-b79faade115544b29530acc19531194d6371aac8.jar" />
+        <dex dex="/Users/likebebop/git/matrixtest/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.2.0_b79faade115544b29530acc19531194d6371aac8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/likebebop/.android/build-cache/3204b70d1ba994bd88d4c71085492f0cfe762096/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/likebebop/git/matrixtest/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_0bb7f33f49cb14cf61f67c50df99ca7298ed562f/classes.dex" />
     </item>
 
 </items>

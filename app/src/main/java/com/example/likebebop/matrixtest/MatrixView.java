@@ -106,7 +106,10 @@ public class MatrixView extends View {
 
     }
 
+    float[] values = new float[9];
+
     public String toString() {
+        matrix.getValues(values);
         return String.format("input = %s\noutput = %s\nmatrix = %s"
                 , pointArrayToString(pts), pointArrayToString(dstPts), matrix.toShortString());
     }
